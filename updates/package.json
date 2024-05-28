@@ -5,7 +5,7 @@
     "build": "webpack",
     "build:watch": "webpack --watch",
     "push": "npm run build && clasp push",
-    "deploy": "pnpm run build:push && clasp deploy -i AKfycbwnX4ViF-q-1fzm7MjUezZ08fXqnOfsu1w_5bu3lZKUEP7BUBJswtAn9bg27IwPaew"
+    "deploy": "pnpm run push && clasp deploy -i AKfycbwnX4ViF-q-1fzm7MjUezZ08fXqnOfsu1w_5bu3lZKUEP7BUBJswtAn9bg27IwPaew"
   },
   "devDependencies": {
     "@types/google-apps-script": "1.0.83",
