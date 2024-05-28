@@ -29,7 +29,7 @@ const doGet = () => {
       
     row["date"] = values[i][0];
     row["type"] = values[i][1];
-    row["names"] = values[i][2];
+    row["names"] = values[i][2].split(", ");
 
     output.push(row);
   }
