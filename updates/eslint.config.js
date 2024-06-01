@@ -6,6 +6,7 @@ export default [
   ...eslint.prettier,
 
   // eslint-plugin-import
+  ...eslint.commonjs,
   ...eslint.esm,
   ...eslint.imports,
 

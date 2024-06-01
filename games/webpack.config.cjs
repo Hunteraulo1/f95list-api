@@ -1,6 +1,6 @@
-import path from 'path'
+const path = require('path')
 
-import GasPlugin from 'gas-webpack-plugin'
+const GasPlugin = require('gas-webpack-plugin')
 
 module.exports = {
   entry: './src/index.ts',
