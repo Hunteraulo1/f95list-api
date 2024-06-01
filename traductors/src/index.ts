@@ -5,6 +5,7 @@ const doGet = () => {
   if (!sheet) return
 
   const values = sheet.getRange('A2:B').getRichTextValues()
+  const valuesNumber = sheet.getRange('C2:D').getValues()
   const output = []
 
   interface Traductor {
@@ -13,8 +14,9 @@ const doGet = () => {
       title: string
       link: string
     }[]
-    tradCount: string[]
-    readCount: string[]
+    tradCount: number
+    readCount: number
+    score: number
   }
 
   for (let i = 0; i < values.length; i++) {
@@ -37,6 +39,9 @@ const doGet = () => {
 
     row['name'] = values[i][0]?.getText()
     row['pages'] = pages
+    row['tradCount'] = valuesNumber[i][0]
+    row['readCount'] = valuesNumber[i][1]
+    row['score'] = valuesNumber[i][0] + valuesNumber[i][1]
 
     output.push(row)
   }
