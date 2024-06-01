@@ -1,30 +1,28 @@
-const path = require("path");
-const GasPlugin = require("gas-webpack-plugin");
+import path from 'path'
+
+import GasPlugin from 'gas-webpack-plugin'
 
 module.exports = {
   entry: './src/index.ts',
-  mode: "development",
+  mode: 'development',
   devtool: false,
 
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, 'dist'),
     filename: 'Code.js',
   },
 
   resolve: {
-    modules: [
-      path.resolve('./src'),
-      "node_modules",
-    ],
-    extensions: [".ts", ".js"],
+    modules: [path.resolve('./src'), 'node_modules'],
+    extensions: ['.ts', '.js'],
   },
 
   module: {
     rules: [
       {
         test: /\.ts$/,
-        loader: "ts-loader",
-      }
+        loader: 'ts-loader',
+      },
     ],
   },
 
@@ -33,4 +31,4 @@ module.exports = {
       autoGlobalExportsFiles: ['**/*.ts'],
     }),
   ],
-};
+}
