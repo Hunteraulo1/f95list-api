@@ -4,10 +4,12 @@ const doGet = () => {
 
   if (!sheet) return
 
-  const values = sheet.getDataRange().getRichTextValues()
+  const valuesId = sheet.getRange('A2:A').getValues()
+  const values = sheet.getRange('B2:N').getRichTextValues()
   const output = []
 
   interface Game {
+    id: number | null
     domain: string
     name: string
     version: string
@@ -31,22 +33,23 @@ const doGet = () => {
   for (let i = 0; i < values.length; i++) {
     if (i > 0) {
       const row: Game = {
-        domain: values[i][1]?.getText() || '',
-        name: values[i][2]?.getText() || '',
-        version: values[i][3]?.getText() || '',
-        tversion: values[i][4]?.getText() || '',
-        tname: values[i][5]?.getText() || '',
-        status: values[i][6]?.getText() || '',
-        tags: values[i][7]?.getText().split(', ') || [],
-        type: values[i][8]?.getText() || '',
-        traductor: values[i][9]?.getText() || null,
-        proofreader: values[i][10]?.getText() || null,
-        ttype: values[i][11]?.getText() || '',
-        ac: Boolean(values[i][12]?.getText()),
-        image: values[i][13]?.getText() || null,
-        link: values[i][2]?.getLinkUrl() || '',
-        tlink: values[i][5]?.getLinkUrl() || '',
-        trlink: values[i][9]?.getLinkUrl() || null,
+        id: valuesId[i][0] || null,
+        domain: values[i][0]?.getText() || '',
+        name: values[i][1]?.getText() || '',
+        version: values[i][2]?.getText() || '',
+        tversion: values[i][3]?.getText() || '',
+        tname: values[i][4]?.getText() || '',
+        status: values[i][5]?.getText() || '',
+        tags: values[i][6]?.getText().split(', ') || [],
+        type: values[i][7]?.getText() || '',
+        traductor: values[i][8]?.getText() || null,
+        proofreader: values[i][9]?.getText() || null,
+        ttype: values[i][10]?.getText() || '',
+        ac: Boolean(values[i][11]?.getText()),
+        image: values[i][12]?.getText() || null,
+        link: values[i][1]?.getLinkUrl() || '',
+        tlink: values[i][4]?.getLinkUrl() || '',
+        trlink: values[i][8]?.getLinkUrl() || null,
       }
 
       output.push(row)
