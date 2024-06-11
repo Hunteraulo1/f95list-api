@@ -11,6 +11,7 @@ const doGet = () => {
   interface Game {
     id: number | null
     domain: string
+    hostname: string
     name: string
     version: string
     tversion: string
@@ -32,9 +33,23 @@ const doGet = () => {
 
   for (let i = 0; i < values.length; i++) {
     if (i > 0) {
+      let hostname
+
+      switch (hostname) {
+        case 'F95z':
+          hostname = 'f95zone.to'
+          break
+        case 'LC':
+          hostname = 'lewdcorner.com'
+          break
+        default:
+          hostname = values[i][0]?.getText().split('.')[0] || ''
+      }
+
       const row: Game = {
         id: valuesId[i][0] || null,
         domain: values[i][0]?.getText() || '',
+        hostname,
         name: values[i][1]?.getText() || '',
         version: values[i][2]?.getText() || '',
         tversion: values[i][3]?.getText() || '',
