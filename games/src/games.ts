@@ -38,7 +38,7 @@ export const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
         case 'F95z':
           hostname = 'f95zone.to'
           break
-        case 'LC':
+        case 'LewdCorner':
           hostname = 'lewdcorner.com'
           break
         default:
