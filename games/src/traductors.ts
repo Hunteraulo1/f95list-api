@@ -1,12 +1,11 @@
-const doGet = () => {
-  const doc = SpreadsheetApp.openById('1ELRF0kpF8SoUlslX5ZXZoG4WXeWST6lN9bLws32EPfs')
+const traductors = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const sheet = doc.getSheetByName('Traducteurs/Relecteurs')
 
-  if (!sheet) return
+  if (!sheet) return []
 
   const values = sheet.getRange('A2:B').getRichTextValues()
   const valuesNumber = sheet.getRange('C2:D').getValues()
-  const output = []
+  const result = []
 
   interface Traductor {
     name: string
@@ -37,15 +36,16 @@ const doGet = () => {
       }
     }
 
-    row['name'] = values[i][0]?.getText()
-    row['pages'] = pages
-    row['tradCount'] = valuesNumber[i][0]
-    row['readCount'] = valuesNumber[i][1]
-    row['score'] = valuesNumber[i][0] + valuesNumber[i][1]
+    row.name = values[i][0]?.getText()
+    row.pages = pages
+    row.tradCount = valuesNumber[i][0]
+    row.readCount = valuesNumber[i][1]
+    row.score = valuesNumber[i][0] + valuesNumber[i][1]
 
-    output.push(row)
+    result.push(row)
   }
-  return ContentService.createTextOutput(JSON.stringify({ data: output })).setMimeType(ContentService.MimeType.JSON)
+
+  return result
 }
 
-export { doGet }
+export default traductors

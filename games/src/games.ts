@@ -1,14 +1,14 @@
-export const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
+const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const sheet = doc.getSheetByName('Jeux')
 
   if (!sheet) return []
 
-  const valuesId = sheet.getRange('A2:A').getValues()
   const values = sheet.getRange('B2:N').getRichTextValues()
+  // const valuesId = sheet.getRange('A2:A').getValues()
   const result = []
 
   interface Game {
-    id: number | null
+    // id: number | null
     domain: string
     hostname: string | null
     name: string
@@ -28,12 +28,10 @@ export const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     trlink: string | null
   }
 
-  console.log('call API')
-
-  for (let i = 0; i < values.length; i++) {
+  for (const value of values) {
     let hostname
 
-    switch (values[i][0]?.getText().split('.')[0]) {
+    switch (value[0]?.getText().split('.')[0]) {
       case 'F95z':
         hostname = 'f95zone.to'
         break
@@ -42,27 +40,28 @@ export const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
         break
       default:
         hostname = null
+        break
     }
 
     const row: Game = {
-      id: valuesId[i][0] || null,
-      domain: values[i][0]?.getText() || '',
+      // id: valuesId[i][0] || null,
+      domain: value[0]?.getText() || '',
       hostname,
-      name: values[i][1]?.getText() || '',
-      version: values[i][2]?.getText() || '',
-      tversion: values[i][3]?.getText() || '',
-      tname: values[i][4]?.getText() || '',
-      status: values[i][5]?.getText() || '',
-      tags: values[i][6]?.getText().split(', ') || [],
-      type: values[i][7]?.getText() || '',
-      traductor: values[i][8]?.getText() || null,
-      proofreader: values[i][9]?.getText() || null,
-      ttype: values[i][10]?.getText() || '',
-      ac: Boolean(values[i][11]?.getText()),
-      image: values[i][12]?.getText() || null,
-      link: values[i][1]?.getLinkUrl() || '',
-      tlink: values[i][4]?.getLinkUrl() || '',
-      trlink: values[i][8]?.getLinkUrl() || null,
+      name: value[1]?.getText() || '',
+      version: value[2]?.getText() || '',
+      tversion: value[3]?.getText() || '',
+      tname: value[4]?.getText() || '',
+      status: value[5]?.getText() || '',
+      tags: value[6]?.getText().split(', ') || [],
+      type: value[7]?.getText() || '',
+      traductor: value[8]?.getText() || null,
+      proofreader: value[9]?.getText() || null,
+      ttype: value[10]?.getText() || '',
+      ac: Boolean(value[11]?.getText()),
+      image: value[12]?.getText() || null,
+      link: value[1]?.getLinkUrl() || '',
+      tlink: value[4]?.getLinkUrl() || '',
+      trlink: value[8]?.getLinkUrl() || null,
     }
 
     result.push(row)
@@ -70,3 +69,5 @@ export const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   return result
 }
+
+export default games
