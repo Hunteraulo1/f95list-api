@@ -12,6 +12,7 @@
     "build:deploy": "pnpm run build:push && clasp deploy -i AKfycbwb8C1478tnW30d77HtECYTxjJ2EpB1OrtQUueFeZ0tZPz3Uuze5s2FAQAnQOKShEzD"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.3",
     "@types/google-apps-script": "^1.0.83",
     "config-aeryle": "^2.0.5",
     "cpx": "^1.5.0",
@@ -26,5 +27,9 @@
     "typescript-eslint": "^7.11.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
-  }
+  },
+  "trustedDependencies": [
+    "@biomejs/biome",
+    "core-js"
+  ]
 }
