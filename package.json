@@ -8,7 +8,7 @@
     "build": "webpack",
     "build:watch": "webpack --watch",
     "build:push": "npm run build && clasp push",
-    "build:deploy": "pnpm run build:push && clasp deploy -i AKfycbwb8C1478tnW30d77HtECYTxjJ2EpB1OrtQUueFeZ0tZPz3Uuze5s2FAQAnQOKShEzD"
+    "build:deploy": "pnpm run build:push && clasp deploy -i AKfycbybvrFy6B2L7rkLWJnrwRHhP0F6Sv0uk6V9zUTZibwEzUjKXf-abOK_N6jUhqFPs9US"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
