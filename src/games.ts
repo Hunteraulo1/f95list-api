@@ -4,7 +4,7 @@ const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   if (!sheet) return []
 
   const values = sheet.getRange('A2:N').getValues()
-  const valuesRich = sheet.getRange('C2:J').getRichTextValues()
+  const valuesRich = sheet.getRange('C2:K').getRichTextValues()
   const result = []
 
   interface Game {
@@ -26,6 +26,7 @@ const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     link: string
     tlink: string
     trlink: string | null
+    prlink: string | null
   }
 
   for (let i = 0; i < values.length; i++) {
@@ -62,6 +63,7 @@ const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
       link: valuesRich[i][0]?.getLinkUrl() || '',
       tlink: valuesRich[i][3]?.getLinkUrl() || '',
       trlink: valuesRich[i][7]?.getLinkUrl() || null,
+      prlink: valuesRich[i][8]?.getLinkUrl() || null,
     }
 
     result.push(row)
