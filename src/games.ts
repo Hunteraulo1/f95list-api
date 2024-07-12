@@ -3,9 +3,8 @@ const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   if (!sheet) return []
 
-  const values = sheet.getRange('B2:N').getRichTextValues()
-  const valuesId = sheet.getRange('A2:A').getValues()
-  const valuesAC = sheet.getRange('M2:M').getValues()
+  const values = sheet.getRange('A2:N').getValues()
+  const valuesRich = sheet.getRange('C2:J').getRichTextValues()
   const result = []
 
   interface Game {
@@ -32,7 +31,7 @@ const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   for (let i = 0; i < values.length; i++) {
     let hostname
 
-    switch (values[i][0]?.getText().split('.')[0]) {
+    switch (values[i][1].split('.')[0]) {
       case 'F95z':
         hostname = 'f95zone.to'
         break
@@ -45,24 +44,24 @@ const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     }
 
     const row: Game = {
-      id: valuesId[i][0] || null,
-      domain: values[i][0]?.getText() || '',
+      id: values[i][0] || null,
+      domain: values[i][1] || '',
       hostname,
-      name: values[i][1]?.getText() || '',
-      version: values[i][2]?.getText() || '',
-      tversion: values[i][3]?.getText() || '',
-      tname: values[i][4]?.getText() || '',
-      status: values[i][5]?.getText() || '',
-      tags: values[i][6]?.getText().split(', ') || [],
-      type: values[i][7]?.getText() || '',
-      traductor: values[i][8]?.getText() || null,
-      proofreader: values[i][9]?.getText() || null,
-      ttype: values[i][10]?.getText() || '',
-      ac: valuesAC[i][0] || false,
-      image: values[i][12]?.getText() || null,
-      link: values[i][1]?.getLinkUrl() || '',
-      tlink: values[i][4]?.getLinkUrl() || '',
-      trlink: values[i][8]?.getLinkUrl() || null,
+      name: values[i][2] || '',
+      version: values[i][3] || '',
+      tversion: values[i][4] || '',
+      tname: values[i][5] || '',
+      status: values[i][6] || '',
+      tags: values[i][7].split(', ') || [],
+      type: values[i][8] || '',
+      traductor: values[i][9] || null,
+      proofreader: values[i][10] || null,
+      ttype: values[i][11] || '',
+      ac: values[i][12] || false,
+      image: values[i][13] || null,
+      link: valuesRich[i][0]?.getLinkUrl() || '',
+      tlink: valuesRich[i][3]?.getLinkUrl() || '',
+      trlink: valuesRich[i][7]?.getLinkUrl() || null,
     }
 
     result.push(row)
