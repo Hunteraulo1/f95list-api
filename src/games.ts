@@ -5,6 +5,7 @@ const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const values = sheet.getRange('B2:N').getRichTextValues()
   const valuesId = sheet.getRange('A2:A').getValues()
+  const valuesAC = sheet.getRange('M2:M').getValues()
   const result = []
 
   interface Game {
@@ -57,7 +58,7 @@ const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
       traductor: values[i][8]?.getText() || null,
       proofreader: values[i][9]?.getText() || null,
       ttype: values[i][10]?.getText() || '',
-      ac: Boolean(values[i][11]?.getText()),
+      ac: valuesAC[i][0] || false,
       image: values[i][12]?.getText() || null,
       link: values[i][1]?.getLinkUrl() || '',
       tlink: values[i][4]?.getLinkUrl() || '',
