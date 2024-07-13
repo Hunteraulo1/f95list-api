@@ -13,7 +13,7 @@ const updates = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   }
 
   const date = new Date()
-  date.setDate(date.getDate() - 30)
+  date.setDate(date.getTime() - 30 * 24 * 3600 * 1000) // 30 days
 
   for (const value of values) {
     const thisDate = new Date(value[0])
