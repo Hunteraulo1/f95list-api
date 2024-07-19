@@ -24,7 +24,7 @@ const updates = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
     row.date = value[0]
     row.type = value[1]
-    row.names = value[2].split(', ')
+    row.names = value[2].split(',  ')
 
     result.push(row)
   }
