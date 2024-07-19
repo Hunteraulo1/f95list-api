@@ -53,7 +53,7 @@ const games = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
       tversion: values[i][4] || '',
       tname: values[i][5] || '',
       status: values[i][6] || '',
-      tags: values[i][7].split(',  ') || [],
+      tags: values[i][7].split(', ') || [],
       type: values[i][8] || '',
       traductor: values[i][9] || null,
       proofreader: values[i][10] || null,
