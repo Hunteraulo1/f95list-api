@@ -3,12 +3,13 @@
   "version": "1.1.1",
   "type": "module",
   "scripts": {
-    "lint": "npx @biomejs/biome lint --write .",
-    "format": "npx @biomejs/biome format --write .",
+    "lint": "bunx @biomejs/biome lint --write .",
+    "format": "bunx @biomejs/biome format --write .",
+    "check": "bunx @biomejs/biome check --write .",
     "build": "webpack",
     "build:watch": "webpack --watch",
-    "build:push": "npm run build && clasp push",
-    "build:deploy": "pnpm run build:push && clasp deploy -i AKfycbybvrFy6B2L7rkLWJnrwRHhP0F6Sv0uk6V9zUTZibwEzUjKXf-abOK_N6jUhqFPs9US"
+    "build:push": "bun run build && clasp push",
+    "build:deploy": "bun run build:push && clasp deploy -i AKfycbybvrFy6B2L7rkLWJnrwRHhP0F6Sv0uk6V9zUTZibwEzUjKXf-abOK_N6jUhqFPs9US"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
@@ -27,8 +28,5 @@
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4"
   },
-  "trustedDependencies": [
-    "@biomejs/biome",
-    "core-js"
-  ]
+  "trustedDependencies": ["@biomejs/biome", "core-js"]
 }
