@@ -11,20 +11,20 @@
     "build:deploy": "pnpm run build:push && clasp deploy -i AKfycbybvrFy6B2L7rkLWJnrwRHhP0F6Sv0uk6V9zUTZibwEzUjKXf-abOK_N6jUhqFPs9US"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.3",
+    "@biomejs/biome": "1.9.3",
     "@types/google-apps-script": "^1.0.83",
     "config-aeryle": "^2.0.5",
     "cpx": "^1.5.0",
-    "eslint": "^9.7.0",
+    "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-prettier": "^5.2.1",
     "gas-webpack-plugin": "^2.6.0",
     "prettier": "^3.3.3",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.5.3",
-    "typescript-eslint": "^7.16.1",
-    "webpack": "^5.93.0",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.8.0",
+    "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4"
   },
   "trustedDependencies": [
