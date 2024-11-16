@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -21,7 +21,9 @@
       "**/yarn.lock"
     ]
   },
-  "organizeImports": { "enabled": true },
+  "organizeImports": {
+    "enabled": true
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -178,7 +180,12 @@
   },
   "overrides": [
     {
-      "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "include": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts",
+        "**/*.cts"
+      ],
       "linter": {
         "rules": {
           "correctness": {
@@ -210,7 +217,21 @@
         }
       }
     },
-    { "include": ["**/*.cjs"], "linter": { "rules": {} } },
-    { "include": ["**/*.{js,mjs,ts}"], "linter": { "rules": {} } }
+    {
+      "include": [
+        "**/*.cjs"
+      ],
+      "linter": {
+        "rules": {}
+      }
+    },
+    {
+      "include": [
+        "**/*.{js,mjs,ts}"
+      ],
+      "linter": {
+        "rules": {}
+      }
+    }
   ]
 }
