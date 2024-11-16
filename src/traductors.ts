@@ -13,7 +13,7 @@ const traductors = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
       title: string
       link: string
     }[]
-    discordId: number
+    discordId: number | null
     tradCount: number
     readCount: number
     score: number
@@ -39,7 +39,7 @@ const traductors = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
     row.name = values[i][0]?.getText()
     row.pages = pages
-    row.discordId = valuesNumber[i][0] ?? null
+    row.discordId = Number(valuesNumber[i][0]) ?? null
     row.tradCount = valuesNumber[i][1]
     row.readCount = valuesNumber[i][2]
     row.score = valuesNumber[i][1] + valuesNumber[i][2]
