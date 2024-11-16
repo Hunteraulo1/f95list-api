@@ -4,7 +4,7 @@ const traductors = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   if (!sheet) return []
 
   const values = sheet.getRange('A2:B').getRichTextValues()
-  const valuesNumber = sheet.getRange('C2:D').getValues()
+  const valuesNumber = sheet.getRange('C2:E').getValues()
   const result = []
 
   interface Traductor {
@@ -13,6 +13,7 @@ const traductors = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
       title: string
       link: string
     }[]
+    discordId: number
     tradCount: number
     readCount: number
     score: number
@@ -38,9 +39,10 @@ const traductors = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
     row.name = values[i][0]?.getText()
     row.pages = pages
-    row.tradCount = valuesNumber[i][0]
-    row.readCount = valuesNumber[i][1]
-    row.score = valuesNumber[i][0] + valuesNumber[i][1]
+    row.discordId = valuesNumber[i][0]
+    row.tradCount = valuesNumber[i][1]
+    row.readCount = valuesNumber[i][2]
+    row.score = valuesNumber[i][1] + valuesNumber[i][2]
 
     result.push(row)
   }
