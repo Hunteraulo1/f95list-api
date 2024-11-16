@@ -180,12 +180,7 @@
   },
   "overrides": [
     {
-      "include": [
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.mts",
-        "**/*.cts"
-      ],
+      "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
       "linter": {
         "rules": {
           "correctness": {
@@ -218,17 +213,13 @@
       }
     },
     {
-      "include": [
-        "**/*.cjs"
-      ],
+      "include": ["**/*.cjs"],
       "linter": {
         "rules": {}
       }
     },
     {
-      "include": [
-        "**/*.{js,mjs,ts}"
-      ],
+      "include": ["**/*.{js,mjs,ts}"],
       "linter": {
         "rules": {}
       }
