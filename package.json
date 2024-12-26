@@ -13,20 +13,20 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/google-apps-script": "^1.0.85",
+    "@types/google-apps-script": "^1.0.87",
     "config-aeryle": "^2.0.5",
     "cpx": "^1.5.0",
-    "eslint": "^9.15.0",
+    "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
     "gas-webpack-plugin": "^2.6.0",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.2",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.14.0",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4"
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.2",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
   },
   "trustedDependencies": [
     "@biomejs/biome",
