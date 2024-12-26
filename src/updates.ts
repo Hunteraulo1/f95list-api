@@ -3,7 +3,7 @@ const updates = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   if (!sheet) return []
 
-  const values = sheet.getRange('A2:C15').getValues()
+  const values = sheet.getRange('A2:C202').getValues() // 200 rows
   const result = []
 
   interface Updates {
@@ -12,14 +12,7 @@ const updates = (doc: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     names: string[]
   }
 
-  const date = new Date()
-  date.setDate(date.getTime() - 90 * 24 * 3600 * 1000) // 90 days
-
   for (const value of values) {
-    const thisDate = new Date(value[0])
-
-    if (thisDate < date) break
-
     const row: Partial<Updates> = {}
 
     row.date = value[0]
