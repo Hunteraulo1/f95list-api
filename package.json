@@ -28,21 +28,13 @@
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"
   },
-  "trustedDependencies": [
-    "@biomejs/biome",
-    "core-js"
-  ],
+  "trustedDependencies": ["@biomejs/biome", "core-js"],
   "config": {
     "commitizen": {
       "path": "cz-emoji"
     },
     "cz-emoji": {
-      "skipQuestions": [
-        "scope",
-        "body",
-        "issues",
-        "breaking"
-      ]
+      "skipQuestions": ["scope", "body", "issues", "breaking"]
     }
   }
 }
