@@ -6,11 +6,11 @@ import translatorRoutes from './v1/translators.js';
 import updateRoutes from './v1/updates.js';
 
 const routes: FastifyPluginAsync = async (app) => {
-  await app.register(healthRoutes, { prefix: '/api' });
-  await app.register(gameRoutes, { prefix: '/api/v1' });
-  await app.register(translationRoutes, { prefix: '/api/v1' });
-  await app.register(translatorRoutes, { prefix: '/api/v1' });
-  await app.register(updateRoutes, { prefix: '/api/v1' });
+  await app.register(healthRoutes, { prefix: '/' });
+  await app.register(gameRoutes, { prefix: '/v1' });
+  await app.register(translationRoutes, { prefix: '/v1' });
+  await app.register(translatorRoutes, { prefix: '/v1' });
+  await app.register(updateRoutes, { prefix: '/v1' });
 };
 
 export default routes;
