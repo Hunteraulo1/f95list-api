@@ -26,6 +26,38 @@
         "breaking",
         "issues",
         "scope"
+      ],
+      "types": [
+        {
+          "emoji": "🌟",
+          "code": ":star2:",
+          "description": "Nouvel endpoint ou comportement API",
+          "name": "feat"
+        },
+        {
+          "emoji": "🐞",
+          "code": ":bug:",
+          "description": "Correction API",
+          "name": "fix"
+        },
+        {
+          "emoji": "📚",
+          "code": ":books:",
+          "description": "Doc OpenAPI / README",
+          "name": "docs"
+        },
+        {
+          "emoji": "♻️",
+          "code": ":recycle:",
+          "description": "Refactor sans changement de contrat",
+          "name": "refactor"
+        },
+        {
+          "emoji": "🔩",
+          "code": ":nut_and_bolt:",
+          "description": "Tooling, deps, CI",
+          "name": "chore"
+        }
       ]
     }
   },
