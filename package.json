@@ -1,6 +1,6 @@
 {
   "name": "f95list-api",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -57,6 +57,12 @@
           "code": ":nut_and_bolt:",
           "description": "Tooling, deps, CI",
           "name": "chore"
+        },
+        {
+          "emoji": "🚀",
+          "code": ":rocket:",
+          "description": "Release / bump de version",
+          "name": "release"
         }
       ]
     }
