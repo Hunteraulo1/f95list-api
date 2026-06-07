@@ -49,6 +49,8 @@ export async function buildApp() {
   await app.register(swaggerPlugin);
   await app.register(drizzlePlugin);
   await app.register(routes);
+  
+  console.info(app.printRoutes());
 
   return app;
 }
