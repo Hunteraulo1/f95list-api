@@ -7,13 +7,13 @@ const dashboardApiKeysUrl =
 const isProduction = process.env.NODE_ENV === 'production';
 
 export const openApiDescription = `
-Routes HTTP en **lecture seule** (méthode **GET**) sous \`/api/v1/*\`, avec en-tête CORS ouvert (\`*\`), destinées aux intégrations publiques. La sonde \`GET /api/health\` est accessible **sans authentification**.
+Routes HTTP en **lecture seule** (méthode **GET**) sous \`/v1/*\`, avec en-tête CORS ouvert (\`*\`), destinées aux intégrations publiques. La sonde \`GET /health\` est accessible **sans authentification**.
 
 **Télécharger la spécification OpenAPI :** [JSON](/json) · [YAML](/yaml)
 
 ### Authentification
 
-Pour chaque opération décrite dans cette spécification (hors \`/api/health\`), la requête doit inclure une **clé API** valide, via **l'une** des options suivantes :
+Pour chaque opération décrite dans cette spécification (hors \`/health\`), la requête doit inclure une **clé API** valide, via **l'une** des options suivantes :
 
 1. En-tête **\`Authorization\`** avec le schéma **\`Bearer\`** et la **clé complète** comme jeton (ex. préfixe \`f95ext_…\`).
 2. En-tête **\`X-Api-Key\`** avec la même valeur.
