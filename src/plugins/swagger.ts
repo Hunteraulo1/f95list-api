@@ -4,6 +4,7 @@ import type { FastifyPluginAsync } from 'fastify';
 import fp from 'fastify-plugin';
 
 import { openApiDescription, openApiServers } from '../lib/openapi-description.js';
+import { buildSwaggerUiTheme, registerSwaggerThemeAssets } from '../lib/swagger-theme/index.js';
 
 const swaggerPlugin: FastifyPluginAsync = async (app) => {
   await app.register(swagger, {
@@ -65,12 +66,15 @@ const swaggerPlugin: FastifyPluginAsync = async (app) => {
 
   await app.register(swaggerUi, {
     routePrefix: '/',
+    theme: buildSwaggerUiTheme(),
     uiConfig: {
       docExpansion: 'list',
       deepLinking: true,
       persistAuthorization: true,
     },
   });
+
+  await registerSwaggerThemeAssets(app);
 };
 
 export default fp(swaggerPlugin, { name: 'swagger' });

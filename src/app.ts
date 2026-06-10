@@ -1,6 +1,5 @@
 import cors from '@fastify/cors';
 import Fastify from 'fastify';
-import { ValiError } from 'valibot';
 
 import { env } from './config/env.js';
 import drizzlePlugin from './plugins/drizzle.js';
@@ -17,18 +16,6 @@ export async function buildApp() {
   });
 
   app.setErrorHandler((error: Error & { statusCode?: number }, _request, reply) => {
-    if (error instanceof ValiError) {
-      return reply.status(400).send({
-        statusCode: 400,
-        error: 'Bad Request',
-        message: 'Validation échouée',
-        details: error.issues.map((issue) => ({
-          path: issue.path?.map((p: { key: string | number }) => p.key).join('.') ?? '',
-          message: issue.message,
-        })),
-      });
-    }
-
     app.log.error(error);
 
     const statusCode =
