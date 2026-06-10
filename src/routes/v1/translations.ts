@@ -3,6 +3,7 @@ import type { FastifyPluginAsync } from 'fastify';
 
 import { gameTranslation } from '../../db/schema.js';
 import { apiError } from '../../lib/api-error.js';
+import { openApiRouteResponses } from '../../schemas/openapi/responses.js';
 import { openApiOperations, openApiParams, openApiQuery } from '../../schemas/openapi/v1.js';
 import { searchParamsFromQuery } from '../../services/include-query.js';
 import { parseTranslationListFilters } from '../../services/translation-list-filters.js';
@@ -25,6 +26,7 @@ const translationRoutes: FastifyPluginAsync = async (app) => {
             versionMatchesTversion: openApiQuery.versionMatchesTversion,
           },
         },
+        response: openApiRouteResponses.listTranslations,
       },
     },
     async (request, reply) => {
@@ -60,6 +62,7 @@ const translationRoutes: FastifyPluginAsync = async (app) => {
           required: ['id'],
           properties: { id: openApiParams.uuidId },
         },
+        response: openApiRouteResponses.getTranslation,
       },
     },
     async (request, reply) => {

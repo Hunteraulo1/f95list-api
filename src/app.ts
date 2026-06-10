@@ -4,6 +4,7 @@ import { ValiError } from 'valibot';
 
 import { env } from './config/env.js';
 import drizzlePlugin from './plugins/drizzle.js';
+import openApiSchemasPlugin from './plugins/openapi-schemas.js';
 import swaggerPlugin from './plugins/swagger.js';
 import routes from './routes/index.js';
 
@@ -47,9 +48,10 @@ export async function buildApp() {
   });
 
   await app.register(swaggerPlugin);
+  await app.register(openApiSchemasPlugin);
   await app.register(drizzlePlugin);
   await app.register(routes);
-  
+
   console.info(app.printRoutes());
 
   return app;

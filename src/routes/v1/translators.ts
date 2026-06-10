@@ -3,6 +3,7 @@ import type { FastifyPluginAsync } from 'fastify';
 
 import { translator } from '../../db/schema.js';
 import { apiError, methodNotAllowed } from '../../lib/api-error.js';
+import { openApiRouteResponses } from '../../schemas/openapi/responses.js';
 import { openApiOperations, openApiParams, openApiQuery } from '../../schemas/openapi/v1.js';
 import { searchParamsFromQuery } from '../../services/include-query.js';
 import {
@@ -30,6 +31,7 @@ const translatorRoutes: FastifyPluginAsync = async (app) => {
             hasDiscord: openApiQuery.hasDiscord,
           },
         },
+        response: openApiRouteResponses.listTranslators,
       },
     },
     async (request, reply) => {
@@ -78,6 +80,7 @@ const translatorRoutes: FastifyPluginAsync = async (app) => {
           required: ['id'],
           properties: { id: openApiParams.uuidId },
         },
+        response: openApiRouteResponses.getTranslator,
       },
     },
     async (request, reply) => {

@@ -72,13 +72,7 @@ Si omis, la réponse inclut les deux cas.`,
   scope: {
     type: 'string',
     enum: ['featured', 'all'],
-    description: `Portée des résultats. Par défaut (\`featured\`) : uniquement les ajouts de jeu/traduction (statut \`adding\`) ou les mises à jour avec changement de version (\`version\` ou \`tversion\` dans l’historique). \`all\` : toutes les entrées de la table \`update\`.
-Alias accepté : paramètre \`updateStatus\` avec les mêmes valeurs \`featured\` ou \`all\`.`,
-  },
-  updateStatus: {
-    type: 'string',
-    enum: ['featured', 'all'],
-    description: `Alias de \`scope\` (\`featured\` ou \`all\`). Ne pas confondre avec le champ JSON \`updateStatus\` (\`adding\` / \`update\`) renvoyé dans chaque entrée.`,
+    description: `Portée des résultats. Par défaut (\`featured\`) : uniquement les ajouts de jeu/traduction (statut \`adding\`) ou les mises à jour avec changement de version (\`version\` ou \`tversion\` dans l’historique). \`all\` : toutes les entrées de la table \`update\`.`,
   },
   startDate: {
     type: 'string',

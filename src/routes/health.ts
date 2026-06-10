@@ -1,6 +1,8 @@
 import { sql } from 'drizzle-orm';
 import type { FastifyPluginAsync } from 'fastify';
 
+import { openApiRouteResponses } from '../schemas/openapi/responses.js';
+
 const healthRoutes: FastifyPluginAsync = async (app) => {
   app.get(
     '/health',
@@ -9,23 +11,7 @@ const healthRoutes: FastifyPluginAsync = async (app) => {
         tags: ['health'],
         description: 'Sonde de santé (app + base de données). Accessible sans authentification.',
         security: [],
-        response: {
-          200: {
-            type: 'object',
-            properties: {
-              status: { type: 'string' },
-              database: { type: 'string' },
-              timestamp: { type: 'string', format: 'date-time' },
-            },
-          },
-          503: {
-            type: 'object',
-            properties: {
-              status: { type: 'string' },
-              database: { type: 'string' },
-            },
-          },
-        },
+        response: openApiRouteResponses.health,
       },
     },
     async (request, reply) => {

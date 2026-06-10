@@ -1,4 +1,4 @@
-import { and, eq, or, type SQL, sql } from 'drizzle-orm';
+import { and, eq, or, sql, type SQL } from 'drizzle-orm';
 
 import * as table from '../db/schema.js';
 
@@ -8,10 +8,6 @@ export function parseUpdatesApiScope(searchParams: URLSearchParams): UpdatesApiS
   const scopeRaw = searchParams.get('scope')?.trim().toLowerCase();
   if (scopeRaw === 'all') return 'all';
   if (scopeRaw === 'featured') return 'featured';
-
-  const updateStatusRaw = searchParams.get('updateStatus')?.trim().toLowerCase();
-  if (updateStatusRaw === 'all') return 'all';
-  if (updateStatusRaw === 'featured') return 'featured';
 
   return 'featured';
 }

@@ -3,6 +3,7 @@ import type { FastifyPluginAsync } from 'fastify';
 
 import { game } from '../../db/schema.js';
 import { apiError, methodNotAllowed } from '../../lib/api-error.js';
+import { openApiRouteResponses } from '../../schemas/openapi/responses.js';
 import { openApiOperations, openApiParams, openApiQuery } from '../../schemas/openapi/v1.js';
 import { translationsByGameIds } from '../../services/games-with-translations.js';
 import { parseInclude, searchParamsFromQuery } from '../../services/include-query.js';
@@ -22,6 +23,7 @@ const gameRoutes: FastifyPluginAsync = async (app) => {
             include: openApiQuery.include,
           },
         },
+        response: openApiRouteResponses.listGames,
       },
     },
     async (request, reply) => {
@@ -78,6 +80,7 @@ const gameRoutes: FastifyPluginAsync = async (app) => {
             include: openApiQuery.include,
           },
         },
+        response: openApiRouteResponses.getGame,
       },
     },
     async (request, reply) => {

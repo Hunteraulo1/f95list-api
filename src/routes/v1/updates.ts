@@ -4,6 +4,7 @@ import type { FastifyPluginAsync } from 'fastify';
 import { enginesPerGameSubquery } from '../../db/engines-per-game-subquery.js';
 import { game, update as updateTable } from '../../db/schema.js';
 import { apiError } from '../../lib/api-error.js';
+import { openApiRouteResponses } from '../../schemas/openapi/responses.js';
 import { openApiOperations, openApiParams, openApiQuery } from '../../schemas/openapi/v1.js';
 import { dateRangeOnColumn, parseOptionalDateRangeQuery } from '../../services/date-range-query.js';
 import { translationsByGameIds } from '../../services/games-with-translations.js';
@@ -24,12 +25,12 @@ const updateRoutes: FastifyPluginAsync = async (app) => {
           properties: {
             limit: openApiQuery.limit,
             scope: openApiQuery.scope,
-            updateStatus: openApiQuery.updateStatus,
             startDate: openApiQuery.startDate,
             endDate: openApiQuery.endDate,
             include: openApiQuery.include,
           },
         },
+        response: openApiRouteResponses.listUpdates,
       },
     },
     async (request, reply) => {
@@ -164,6 +165,7 @@ const updateRoutes: FastifyPluginAsync = async (app) => {
             include: openApiQuery.include,
           },
         },
+        response: openApiRouteResponses.getUpdate,
       },
     },
     async (request, reply) => {

@@ -7,6 +7,17 @@ import { openApiDescription, openApiServers } from '../lib/openapi-description.j
 
 const swaggerPlugin: FastifyPluginAsync = async (app) => {
   await app.register(swagger, {
+    refResolver: {
+      buildLocalReference(json, _baseUri, _fragment, i) {
+        if (!json.title && json.$id) {
+          json.title = json.$id;
+        }
+        if (!json.$id) {
+          return `def-${i}`;
+        }
+        return `${json.$id}`;
+      },
+    },
     openapi: {
       info: {
         title: 'API publique F95 France',
