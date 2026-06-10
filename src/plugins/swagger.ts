@@ -71,6 +71,8 @@ const swaggerPlugin: FastifyPluginAsync = async (app) => {
       docExpansion: 'list',
       deepLinking: true,
       persistAuthorization: true,
+      defaultModelExpandDepth: 10,
+      defaultModelsExpandDepth: 2,
     },
   });
 
