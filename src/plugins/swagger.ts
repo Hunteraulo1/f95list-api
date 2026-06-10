@@ -4,6 +4,7 @@ import type { FastifyPluginAsync } from 'fastify';
 import fp from 'fastify-plugin';
 
 import { openApiDescription, openApiServers } from '../lib/openapi-description.js';
+import { packageVersion } from '../lib/package-version.js';
 import { buildSwaggerUiTheme, registerSwaggerThemeAssets } from '../lib/swagger-theme/index.js';
 
 const swaggerPlugin: FastifyPluginAsync = async (app) => {
@@ -23,7 +24,7 @@ const swaggerPlugin: FastifyPluginAsync = async (app) => {
       info: {
         title: 'API publique F95 France',
         description: openApiDescription,
-        version: '1.0.0',
+        version: packageVersion(),
       },
       servers: openApiServers,
       tags: [
