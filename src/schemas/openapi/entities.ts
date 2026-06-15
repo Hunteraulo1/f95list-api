@@ -1,14 +1,14 @@
 /** Schémas JSON partagés (enregistrés via `fastify.addSchema`). */
 
 import {
-  apiErrorExample,
-  embeddedGameExample,
-  gameExample,
-  healthOkExample,
-  healthUnavailableExample,
-  translationExample,
-  translatorExample,
-  updateSlimExample,
+    apiErrorExample,
+    embeddedGameExample,
+    gameExample,
+    healthOkExample,
+    healthUnavailableExample,
+    translationExample,
+    translatorExample,
+    updateSlimExample,
 } from './examples.js';
 import { prop } from './property-schemas.js';
 
@@ -30,7 +30,7 @@ export const openApiEntitySchemas = [
     required: ['status', 'database', 'timestamp'],
     properties: {
       status: prop.enumString('État global de l’application.', ['ok']),
-      database: prop.enumString('État de la connexion PostgreSQL.', ['up']),
+      database: prop.enumString('État de la connexion MariaDB.', ['up']),
       timestamp: prop.timestamp('Horodatage ISO 8601 de la sonde.'),
     },
     example: healthOkExample,
@@ -42,7 +42,7 @@ export const openApiEntitySchemas = [
     required: ['status', 'database'],
     properties: {
       status: prop.enumString('État global de l’application.', ['error']),
-      database: prop.enumString('État de la connexion PostgreSQL.', ['down']),
+      database: prop.enumString('État de la connexion MariaDB.', ['down']),
     },
     example: healthUnavailableExample,
   },

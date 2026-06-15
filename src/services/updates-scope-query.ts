@@ -1,4 +1,4 @@
-import { and, eq, or, type SQL, sql } from 'drizzle-orm';
+import { and, eq, or, sql, type SQL } from 'drizzle-orm';
 
 import * as table from '../db/schema.js';
 
@@ -20,9 +20,16 @@ export function featuredUpdatesScopeWhere(): SQL {
     where uh.update_id = ${table.update.id}
     and uh.changes is not null
     and exists (
-      select 1 from jsonb_array_elements(uh.changes::jsonb->'deltas') as delta
-      where (delta->>'field' = 'version' or delta->>'field' = 'tversion')
-      and coalesce(delta->>'oldValue', '') is distinct from coalesce(delta->>'newValue', '')
+      select 1 from json_table(
+        uh.changes,
+        '$.deltas[*]' columns (
+          field varchar(64) path '$.field',
+          old_value text path '$.oldValue',
+          new_value text path '$.newValue'
+        )
+      ) as delta
+      where (delta.field = 'version' or delta.field = 'tversion')
+      and not (coalesce(delta.old_value, '') <=> coalesce(delta.new_value, ''))
     )
   )`;
 

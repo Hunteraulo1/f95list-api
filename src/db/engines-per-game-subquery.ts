@@ -8,7 +8,7 @@ export function enginesPerGameSubquery() {
   return db
     .select({
       gameId: table.gameTranslation.gameId,
-      engineTypes: sql<string[]>`array_agg(distinct ${table.gameTranslation.gameType})`.as(
+      engineTypes: sql<string[]>`json_arrayagg(distinct ${table.gameTranslation.gameType})`.as(
         'engine_types',
       ),
     })

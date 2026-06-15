@@ -8,5 +8,5 @@ export type DatabaseConfig = {
 
 export function buildDatabaseUrl(config: DatabaseConfig): string {
   const { host, port, user, password, name } = config;
-  return `postgres://${encodeURIComponent(user)}:${encodeURIComponent(password)}@${host}:${port}/${name}`;
+  return `mysql://${encodeURIComponent(user)}:${encodeURIComponent(password)}@${host}:${port}/${name}`;
 }
