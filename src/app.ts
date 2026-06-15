@@ -2,6 +2,7 @@ import cors from '@fastify/cors';
 import Fastify from 'fastify';
 
 import { env } from './config/env.js';
+import apiKeyAuthPlugin from './plugins/api-key-auth.js';
 import drizzlePlugin from './plugins/drizzle.js';
 import openApiSchemasPlugin from './plugins/openapi-schemas.js';
 import swaggerPlugin from './plugins/swagger.js';
@@ -37,6 +38,7 @@ export async function buildApp() {
   await app.register(swaggerPlugin);
   await app.register(openApiSchemasPlugin);
   await app.register(drizzlePlugin);
+  await app.register(apiKeyAuthPlugin);
   await app.register(routes);
 
   console.info(app.printRoutes());
