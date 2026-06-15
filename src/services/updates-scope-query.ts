@@ -1,4 +1,4 @@
-import { and, eq, or, sql, type SQL } from 'drizzle-orm';
+import { and, eq, or, type SQL, sql } from 'drizzle-orm';
 
 import * as table from '../db/schema.js';
 

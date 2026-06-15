@@ -1,14 +1,14 @@
 /** Schémas JSON partagés (enregistrés via `fastify.addSchema`). */
 
 import {
-    apiErrorExample,
-    embeddedGameExample,
-    gameExample,
-    healthOkExample,
-    healthUnavailableExample,
-    translationExample,
-    translatorExample,
-    updateSlimExample,
+  apiErrorExample,
+  embeddedGameExample,
+  gameExample,
+  healthOkExample,
+  healthUnavailableExample,
+  translationExample,
+  translatorExample,
+  updateSlimExample,
 } from './examples.js';
 import { prop } from './property-schemas.js';
 

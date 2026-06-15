@@ -47,9 +47,7 @@ export const session = mysqlTable('session', {
 });
 
 export const passkey = mysqlTable('passkey', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   userId: varchar('user_id', { length: 255 })
     .notNull()
     .references(() => user.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
@@ -62,9 +60,7 @@ export const passkey = mysqlTable('passkey', {
 });
 
 export const passkeyChallenge = mysqlTable('passkey_challenge', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   userId: varchar('user_id', { length: 255 }).references(() => user.id, {
     onDelete: 'cascade',
     onUpdate: 'cascade',
@@ -83,9 +79,7 @@ export const loginThrottle = mysqlTable('login_throttle', {
 });
 
 export const apiKey = mysqlTable('api_key', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   keyHash: varchar('key_hash', { length: 64 }).notNull().unique(),
   keyPrefix: varchar('key_prefix', { length: 32 }).notNull(),
   label: varchar('label', { length: 255 }).notNull().default(''),
@@ -115,9 +109,7 @@ export const apiKeyRate = mysqlTable('api_key_rate', {
 });
 
 export const game = mysqlTable('game', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   name: varchar('name', { length: 255 }).notNull(),
   tags: text('tags').notNull(),
   image: varchar('image', { length: 500 }).notNull(),
@@ -133,9 +125,7 @@ export const game = mysqlTable('game', {
 });
 
 export const gameTranslation = mysqlTable('game_translation', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   gameId: varchar('game_id', { length: 255 })
     .notNull()
     .references(() => game.id),
@@ -156,9 +146,7 @@ export const gameTranslation = mysqlTable('game_translation', {
 });
 
 export const update = mysqlTable('update', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   gameId: varchar('game_id', { length: 255 })
     .notNull()
     .references(() => game.id),
@@ -168,9 +156,7 @@ export const update = mysqlTable('update', {
 });
 
 export const translator = mysqlTable('translator', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   name: varchar('name', { length: 255 }).notNull().unique(),
   userId: varchar('user_id', { length: 255 }).references(() => user.id),
   pages: text('pages').notNull(),
@@ -192,9 +178,7 @@ export const config = mysqlTable('config', {
 });
 
 export const submission = mysqlTable('submission', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   userId: varchar('user_id', { length: 255 })
     .notNull()
     .references(() => user.id),
@@ -212,9 +196,7 @@ export const submission = mysqlTable('submission', {
 });
 
 export const apiLog = mysqlTable('api_log', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   userId: varchar('user_id', { length: 255 }).references(() => user.id, {
     onDelete: 'set null',
     onUpdate: 'cascade',
@@ -229,9 +211,7 @@ export const apiLog = mysqlTable('api_log', {
 });
 
 export const appLog = mysqlTable('app_log', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   level: varchar('level', { length: 16 }).notNull(),
   source: varchar('source', { length: 64 }).notNull(),
   message: text('message').notNull(),
@@ -240,9 +220,7 @@ export const appLog = mysqlTable('app_log', {
 });
 
 export const notification = mysqlTable('notification', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   userId: varchar('user_id', { length: 255 })
     .notNull()
     .references(() => user.id, {
@@ -292,9 +270,7 @@ export const appRolePermission = mysqlTable(
 );
 
 export const updateHistory = mysqlTable('update_history', {
-  id: varchar('id', { length: 255 })
-    .primaryKey()
-    .default(sql`(uuid())`),
+  id: varchar('id', { length: 255 }).primaryKey().default(sql`(uuid())`),
   updateId: varchar('update_id', { length: 255 })
     .notNull()
     .references(() => update.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
