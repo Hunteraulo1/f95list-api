@@ -2,7 +2,8 @@ import { config } from 'dotenv';
 import * as v from 'valibot';
 
 import { buildDatabaseUrl } from './build-database-url.js';
-import { MARIADB_SSL_MODES, normalizeMariaDbSslMode, type MariaDbSslMode } from './mariadb-ssl.js';
+import type { MariaDbSslMode } from './mariadb-ssl.js';
+import { MARIADB_SSL_MODES, normalizeMariaDbSslMode } from './mariadb-ssl.js';
 
 config();
 
