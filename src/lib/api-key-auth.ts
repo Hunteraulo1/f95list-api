@@ -11,6 +11,8 @@ const API_KEY_KIND_BEARER = 'bearer';
 const API_KEY_EXTENSION_ONLY_LABEL_TOKEN = '[extension-only]';
 const EXTENSION_ONLY_API_ROUTE = '/api/extension-api';
 
+export const EXPLOITATION_SI_API_KEY_LABEL = '[exploitation-si]';
+
 export type ApiKeyValidateFailure =
   | 'missing'
   | 'invalid'
@@ -98,6 +100,7 @@ export async function consumeApiKeyRate(
 export type ApiKeyAuthContext = {
   keyId: string;
   ownerUserId: string;
+  label: string;
   routeScope: string | null;
 };
 
@@ -159,9 +162,14 @@ export async function validateApiKeyRequest(
     auth: {
       keyId: row.id,
       ownerUserId: row.ownerUserId,
+      label: row.label,
       routeScope,
     },
   };
+}
+
+export function hasApiKeyLabel(request: FastifyRequest, expectedLabel: string): boolean {
+  return request.apiKeyAuth?.label === expectedLabel;
 }
 
 const FAILURE_SPEC: Record<

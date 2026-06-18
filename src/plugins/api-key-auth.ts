@@ -2,9 +2,9 @@ import type { FastifyPluginAsync } from 'fastify';
 import fp from 'fastify-plugin';
 
 import {
-  apiKeyFailureResponse,
-  isApiKeyExemptPath,
-  validateApiKeyRequest,
+    apiKeyFailureResponse,
+    isApiKeyExemptPath,
+    validateApiKeyRequest,
 } from '../lib/api-key-auth.js';
 
 declare module 'fastify' {
@@ -12,6 +12,7 @@ declare module 'fastify' {
     apiKeyAuth?: {
       keyId: string;
       ownerUserId: string;
+      label: string;
       routeScope: string | null;
     };
   }
