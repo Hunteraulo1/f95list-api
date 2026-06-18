@@ -3,7 +3,14 @@ import { and, eq, isNotNull, ne, sql } from 'drizzle-orm';
 import type { Database } from '../db/index.js';
 import { apiLog, user } from '../db/schema.js';
 
-const MANY_IPS_THRESHOLD = 20;
+const MANY_IPS_THRESHOLD = 10;
+
+function toIsoString(value: Date | string): string {
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+  return new Date(value).toISOString();
+}
 
 export type UserIpEntry = {
   ip: string;
@@ -26,8 +33,8 @@ export async function listUserIpAggregates(db: Database): Promise<UserIpAggregat
       nomUser: user.username,
       ip: apiLog.ipAddress,
       use: sql<number>`cast(count(*) as signed)`.as('use'),
-      start: sql<Date>`min(${apiLog.createdAt})`.as('start'),
-      end: sql<Date>`max(${apiLog.createdAt})`.as('end'),
+      start: sql<string>`min(${apiLog.createdAt})`.as('start'),
+      end: sql<string>`max(${apiLog.createdAt})`.as('end'),
     })
     .from(apiLog)
     .innerJoin(user, eq(apiLog.userId, user.id))
@@ -52,9 +59,9 @@ export async function listUserIpAggregates(db: Database): Promise<UserIpAggregat
 
     aggregate.ips.push({
       ip: row.ip,
-      use: row.use,
-      start: row.start.toISOString(),
-      end: row.end.toISOString(),
+      use: Number(row.use),
+      start: toIsoString(row.start),
+      end: toIsoString(row.end),
     });
   }
 
