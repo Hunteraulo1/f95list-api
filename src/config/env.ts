@@ -2,17 +2,25 @@ import { config } from 'dotenv';
 import * as v from 'valibot';
 
 import { buildDatabaseUrl } from './build-database-url.js';
+import { MARIADB_SSL_MODES, normalizeMariaDbSslMode, type MariaDbSslMode } from './mariadb-ssl.js';
 
 config();
 
 const envSchema = v.object({
   PORT: v.optional(v.pipe(v.string(), v.transform(Number), v.integer(), v.minValue(1))),
   HOST: v.optional(v.string()),
-  DB_HOST: v.optional(v.string()),
-  DB_PORT: v.optional(v.pipe(v.string(), v.transform(Number), v.integer(), v.minValue(1))),
-  DB_USER: v.pipe(v.string(), v.minLength(1)),
-  DB_PASSWORD: v.optional(v.string()),
-  DB_NAME: v.pipe(v.string(), v.minLength(1)),
+  MARIADB_HOST: v.optional(v.string()),
+  MARIADB_PORT: v.optional(v.pipe(v.string(), v.transform(Number), v.integer(), v.minValue(1))),
+  MARIADB_USER: v.pipe(v.string(), v.minLength(1)),
+  MARIADB_PASSWORD: v.optional(v.string()),
+  MARIADB_DATABASE: v.pipe(v.string(), v.minLength(1)),
+  MARIADB_SSL_MODE: v.optional(
+    v.pipe(
+      v.string(),
+      v.transform((value) => normalizeMariaDbSslMode(value)),
+      v.picklist(MARIADB_SSL_MODES),
+    ),
+  ),
 });
 
 const parsed = v.safeParse(envSchema, process.env);
@@ -22,20 +30,22 @@ if (!parsed.success) {
   process.exit(1);
 }
 
-const dbHost = parsed.output.DB_HOST ?? 'localhost';
-const dbPort = parsed.output.DB_PORT ?? 5432;
-const dbUser = parsed.output.DB_USER;
-const dbPassword = parsed.output.DB_PASSWORD ?? '';
-const dbName = parsed.output.DB_NAME;
+const dbHost = parsed.output.MARIADB_HOST ?? 'localhost';
+const dbPort = parsed.output.MARIADB_PORT ?? 3306;
+const dbSslMode: MariaDbSslMode = parsed.output.MARIADB_SSL_MODE ?? 'disable';
+const dbUser = parsed.output.MARIADB_USER;
+const dbPassword = parsed.output.MARIADB_PASSWORD ?? '';
+const dbName = parsed.output.MARIADB_DATABASE;
 
 export const env = {
   PORT: parsed.output.PORT ?? 3000,
   HOST: parsed.output.HOST ?? '0.0.0.0',
-  DB_HOST: dbHost,
-  DB_PORT: dbPort,
-  DB_USER: dbUser,
-  DB_PASSWORD: dbPassword,
-  DB_NAME: dbName,
+  MARIADB_HOST: dbHost,
+  MARIADB_PORT: dbPort,
+  MARIADB_USER: dbUser,
+  MARIADB_PASSWORD: dbPassword,
+  MARIADB_DATABASE: dbName,
+  MARIADB_SSL_MODE: dbSslMode,
   DATABASE_URL: buildDatabaseUrl({
     host: dbHost,
     port: dbPort,

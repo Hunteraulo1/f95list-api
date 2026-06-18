@@ -1,0 +1,45 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    restart: unless-stopped
+
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+      - NODE_ENV=production
+      
+      - MARIADB_HOST=${MARIADB_HOST:?}
+      - MARIADB_PORT=${MARIADB_PORT:?3306}
+      - MARIADB_DATABASE=${MARIADB_DATABASE:?}
+      - MARIADB_USER=${MARIADB_USER:?}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD:?}
+      - MARIADB_SSL_MODE=${MARIADB_SSL_MODE:?disable}
+
+    expose:
+      - '3000'
+
+    healthcheck:
+      test:
+        - CMD
+        - bun
+        - -e
+        - "fetch('http://127.0.0.1:3000/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=coolify
+      - traefik.http.services.f95-api-prod.loadbalancer.server.port=3000
+
+    networks:
+      - coolify
+
+networks:
+  coolify:
+    external: true
