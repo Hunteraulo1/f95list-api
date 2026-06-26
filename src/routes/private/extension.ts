@@ -1,6 +1,7 @@
 import type { FastifyPluginAsync } from 'fastify';
 
 import { apiError, methodNotAllowed } from '../../lib/api-error.js';
+import { isExtensionClientRequest } from '../../lib/extension-origin.js';
 import { buildExtensionApiPayload } from '../../services/extension-api.js';
 
 const extensionRoutes: FastifyPluginAsync = async (app) => {
@@ -11,7 +12,8 @@ const extensionRoutes: FastifyPluginAsync = async (app) => {
         tags: ['Extension'],
         summary: 'Données agrégées pour l’extension navigateur',
         description:
-          'Renvoie les jeux, mises à jour et traducteurs au format attendu par l’extension navigateur (libellés français). Filtrer sur un jeu via le paramètre `gameId`.',
+          'Renvoie les jeux, mises à jour et traducteurs au format attendu par l’extension navigateur (libellés français). Filtrer sur un jeu via le paramètre `gameId`. Accès réservé aux origines de l’extension et des forums (pas de clé API).',
+        security: [],
         querystring: {
           type: 'object',
           properties: {
@@ -43,6 +45,9 @@ const extensionRoutes: FastifyPluginAsync = async (app) => {
       },
     },
     async (request, reply) => {
+      if (!isExtensionClientRequest(request)) {
+        return apiError(reply, 403, "Accès interdit à l'API extension.");
+      }
       try {
         const { gameId } = request.query as { gameId?: string };
         const data = await buildExtensionApiPayload(app.db, gameId?.trim() || undefined);

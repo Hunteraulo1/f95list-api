@@ -223,6 +223,12 @@ export function isApiKeyExemptPath(method: string, pathname: string): boolean {
     return true;
   }
 
+  // L'API extension est protégée par contrôle d'origine (voir extension-origin.ts),
+  // pas par clé API.
+  if (pathname === '/private/extension' || pathname === '/private/extension/') {
+    return true;
+  }
+
   if (
     pathname === '/' ||
     pathname === '/json' ||

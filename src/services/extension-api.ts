@@ -259,7 +259,8 @@ export async function buildExtensionApiPayload(db: Database, gameId?: string) {
       gameId: updateTable.gameId,
     })
     .from(updateTable)
-    .orderBy(desc(updateTable.createdAt));
+    .orderBy(desc(updateTable.createdAt))
+    .limit(200);
 
   const updates = updateRows.map((u) => ({
     date: u.date,
