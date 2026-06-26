@@ -9,7 +9,7 @@ import { apiKey, apiKeyRate, user } from '../db/schema.js';
 const RATE_WINDOW_MS = 60_000;
 const API_KEY_KIND_BEARER = 'bearer';
 const API_KEY_EXTENSION_ONLY_LABEL_TOKEN = '[extension-only]';
-const EXTENSION_ONLY_API_ROUTE = '/api/extension-api';
+const EXTENSION_ONLY_API_ROUTE = '/private/extension';
 
 export const EXPLOITATION_SI_API_KEY_LABEL = '[exploitation-si]';
 

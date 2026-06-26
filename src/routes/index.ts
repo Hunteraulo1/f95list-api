@@ -1,5 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify';
 import healthRoutes from './health.js';
+import extensionRoutes from './private/extension.js';
 import privateIpsRoutes from './private/ips.js';
 import gameRoutes from './v1/games.js';
 import translationRoutes from './v1/translations.js';
@@ -13,6 +14,7 @@ const routes: FastifyPluginAsync = async (app) => {
   await app.register(translationRoutes, { prefix: '/v1' });
   await app.register(translatorRoutes, { prefix: '/v1' });
   await app.register(updateRoutes, { prefix: '/v1' });
+  await app.register(extensionRoutes, { prefix: '/private' });
 };
 
 export default routes;
