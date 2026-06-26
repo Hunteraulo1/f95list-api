@@ -127,7 +127,7 @@ const splitTags = (raw: string | null | undefined): string[] =>
 type ParsedPage = { title: string; link: string };
 
 const parsePages = (raw: string | null | undefined): ParsedPage[] => {
-  if (!raw || !raw.trim()) return [];
+  if (!raw?.trim()) return [];
   try {
     const parsed = JSON.parse(raw) as unknown;
     if (!Array.isArray(parsed)) return [];
