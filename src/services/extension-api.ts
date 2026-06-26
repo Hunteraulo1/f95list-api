@@ -165,6 +165,7 @@ export async function buildExtensionApiPayload(db: Database, gameId?: string) {
         id: game.id,
         name: game.name,
         description: game.description,
+        descriptionFr: game.descriptionFr,
         website: game.website,
         threadId: game.threadId,
         link: game.link,
@@ -220,38 +221,42 @@ export async function buildExtensionApiPayload(db: Database, gameId?: string) {
 
   const translatorById = new Map(translatorRows.map((tr) => [tr.id, tr]));
 
-  const games = rows.map((row) => {
-    const tr = row.translation.translatorId
-      ? translatorById.get(row.translation.translatorId)
-      : null;
-    const pr = row.translation.proofreaderId
-      ? translatorById.get(row.translation.proofreaderId)
-      : null;
-    return {
-      id: row.translation.id,
-      gameId: row.game.id,
-      threadId: row.game.threadId ?? null,
-      domain: mapDomain(row.game.website),
-      hostname: mapHostname(row.game.website),
-      name: row.translation.translationName ? `${row.game.name} - ${row.translation.translationName}` : row.game.name,
-      version: row.translation.version ?? row.game.gameVersion ?? null,
-      tversion: row.translation.tversion,
-      tname: mapTName(row.translation.tname),
-      description: row.game.description ?? null,
-      status: mapStatus(row.translation.status),
-      tags: splitTags(row.game.tags),
-      type: mapType(row.translation.gameType),
-      traductor: tr?.name ?? null,
-      proofreader: pr?.name ?? null,
-      ttype: mapTType(row.translation.ttype),
-      ac: Boolean(row.translation.ac),
-      link: row.game.link,
-      tlink: row.translation.tlink?.trim() ? row.translation.tlink : null,
-      trlink: firstPageLink(tr?.pages),
-      prlink: firstPageLink(pr?.pages),
-      image: row.game.image?.trim() ? row.game.image : null,
-    };
-  });
+  const games = rows
+    .filter((row) => (row.translation.tname ?? '').trim().toLowerCase() !== 'no_translation')
+    .map((row) => {
+      const tr = row.translation.translatorId
+        ? translatorById.get(row.translation.translatorId)
+        : null;
+      const pr = row.translation.proofreaderId
+        ? translatorById.get(row.translation.proofreaderId)
+        : null;
+      return {
+        id: row.translation.id,
+        gameId: row.game.id,
+        threadId: row.game.threadId ?? null,
+        domain: mapDomain(row.game.website),
+        hostname: mapHostname(row.game.website),
+        name: row.translation.translationName
+          ? `${row.game.name} - ${row.translation.translationName}`
+          : row.game.name,
+        version: row.translation.version ?? row.game.gameVersion ?? null,
+        tversion: row.translation.tversion,
+        tname: mapTName(row.translation.tname),
+        description: row.game.descriptionFr ?? row.game.description ?? null,
+        status: mapStatus(row.translation.status),
+        tags: splitTags(row.game.tags),
+        type: mapType(row.translation.gameType),
+        traductor: tr?.name ?? null,
+        proofreader: pr?.name ?? null,
+        ttype: mapTType(row.translation.ttype),
+        ac: Boolean(row.translation.ac),
+        link: row.game.link,
+        tlink: row.translation.tlink?.trim() ? row.translation.tlink : null,
+        trlink: firstPageLink(tr?.pages),
+        prlink: firstPageLink(pr?.pages),
+        image: row.game.image?.trim() ? row.game.image : null,
+      };
+    });
 
   const updateRows = await db
     .select({
