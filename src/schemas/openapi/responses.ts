@@ -41,8 +41,8 @@ export const openApiRouteResponses = {
       description:
         'Tableau de jeux. Avec `include=translations`, chaque élément inclut un tableau `translations` trié par `updatedAt` décroissant.',
       oneOf: [
-        { type: 'array', items: { $ref: 'Game#' } },
         { type: 'array', items: { $ref: 'GameWithTranslations#' } },
+        { type: 'array', items: { $ref: 'Game#' } },
       ],
     },
     ...authenticatedErrors,
@@ -50,7 +50,7 @@ export const openApiRouteResponses = {
   getGame: {
     200: {
       description: 'Jeu trouvé. Avec `include=translations`, un tableau `translations` est ajouté.',
-      oneOf: [{ $ref: 'Game#' }, { $ref: 'GameWithTranslations#' }],
+      oneOf: [{ $ref: 'GameWithTranslations#' }, { $ref: 'Game#' }],
     },
     ...authenticatedDetailErrors,
   },
@@ -89,10 +89,10 @@ export const openApiRouteResponses = {
       description:
         'Tableau de mises à jour. La forme dépend de `include` : par défaut entrée « slim » ; avec `game`, `translations` ou les deux, l’objet `game` est ajouté selon la variante documentée.',
       oneOf: [
-        { type: 'array', items: { $ref: 'UpdateSlim#' } },
-        { type: 'array', items: { $ref: 'UpdateWithEmbeddedGame#' } },
-        { type: 'array', items: { $ref: 'UpdateWithGameTranslations#' } },
         { type: 'array', items: { $ref: 'UpdateWithFullGame#' } },
+        { type: 'array', items: { $ref: 'UpdateWithGameTranslations#' } },
+        { type: 'array', items: { $ref: 'UpdateWithEmbeddedGame#' } },
+        { type: 'array', items: { $ref: 'UpdateSlim#' } },
       ],
     },
     ...authenticatedErrors,
@@ -101,10 +101,10 @@ export const openApiRouteResponses = {
     200: {
       description: 'Mise à jour trouvée. Même logique de forme que la liste selon `include`.',
       oneOf: [
-        { $ref: 'UpdateSlim#' },
-        { $ref: 'UpdateWithEmbeddedGame#' },
-        { $ref: 'UpdateWithGameTranslations#' },
         { $ref: 'UpdateWithFullGame#' },
+        { $ref: 'UpdateWithGameTranslations#' },
+        { $ref: 'UpdateWithEmbeddedGame#' },
+        { $ref: 'UpdateSlim#' },
       ],
     },
     ...authenticatedDetailErrors,
